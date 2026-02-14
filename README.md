@@ -2,6 +2,10 @@
 
 [![English](https://img.shields.io/badge/English-blue)](README.md)　[![中文](https://img.shields.io/badge/中文-orange)](README_zh.md)
 
+## 🎮 Play Now
+
+**[Click here to play the game](https://stick-hero-pressure.vercel.app/)**
+
 A pressure-sensitive twist on Stick Hero where you control stick length by pressing harder. Built with HTML, CSS, and JavaScript.
 
 ![Gameplay Demo](gameplay-demo.gif)

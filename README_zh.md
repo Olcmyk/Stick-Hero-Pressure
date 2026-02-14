@@ -2,6 +2,10 @@
 
 [![English](https://img.shields.io/badge/English-blue)](README.md)　[![中文](https://img.shields.io/badge/中文-orange)](README_zh.md)
 
+## 🎮 在线试玩
+
+**[点击这里开始游戏](https://stick-hero-pressure.vercel.app/)**
+
 一款基于压感触控的 Stick Hero 改编游戏，通过按压力度控制棍子长度。使用 HTML、CSS 和 JavaScript 构建。
 
 ![游戏演示](gameplay-demo.gif)
