@@ -1,5 +1,7 @@
 # Stick Hero
 
+![Gameplay Demo](gameplay-demo.gif)
+
 <details open>
 <summary><b>🇺🇸 English</b></summary>
 

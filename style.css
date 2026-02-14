@@ -47,6 +47,7 @@ body {
   width: 100px;
   height: 100px;
   position: absolute;
+  margin-bottom: 80px;
   border-radius: 50%;
   color: white;
   background-color: rgb(56, 148, 103);
