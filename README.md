@@ -17,7 +17,7 @@ Other browsers or devices do not support the pressure-sensitive trackpad API use
 ## How to Play
 
 1. **Press and hold** the trackpad to start growing the stick
-2. **Press harder** to make the stick grow faster — the pressure you apply directly controls the stick length
+2. **The harder you press, the longer the stick** — pressure directly controls stick length
 3. A countdown timer will appear. When it reaches **0**, the stick length locks and the stick falls
 4. If the stick reaches the next platform, your hero walks across. If not, game over!
 5. Land on the **red zone** in the center of platforms for **double score**
