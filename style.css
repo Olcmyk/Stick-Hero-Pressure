@@ -55,3 +55,18 @@ body {
   opacity: 0;
   transition: opacity 2s;
 }
+
+#countdown {
+  position: absolute;
+  top: 20%;
+  font-size: 5em;
+  font-weight: 900;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  opacity: 0;
+  transition: color 0.1s;
+}
+
+#countdown.warning {
+  color: red;
+}

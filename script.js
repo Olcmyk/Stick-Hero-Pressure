@@ -61,6 +61,15 @@ const introductionElement = document.getElementById("introduction");
 const perfectElement = document.getElementById("perfect");
 const restartButton = document.getElementById("restart");
 const scoreElement = document.getElementById("score");
+const countdownElement = document.getElementById("countdown");
+
+// Countdown variables
+let countdownStartTime;
+const countdownDuration = 3000; // 3 seconds in milliseconds
+
+// Force Touch variables
+let currentForce = 0;
+const maxStickLength = 400; // Maximum stick length at full force
 
 // Initialize layout
 resetGame();
@@ -76,6 +85,8 @@ function resetGame() {
   introductionElement.style.opacity = 1;
   perfectElement.style.opacity = 0;
   restartButton.style.display = "none";
+  countdownElement.style.opacity = 0;
+  countdownElement.classList.remove("warning");
   scoreElement.innerText = score;
 
   // The first platform is always the same
@@ -156,18 +167,33 @@ window.addEventListener("keydown", function (event) {
   }
 });
 
+// Safari trackpad click to start countdown
 window.addEventListener("mousedown", function (event) {
   if (phase == "waiting") {
     lastTimestamp = undefined;
+    countdownStartTime = undefined;
+    currentForce = 0;
     introductionElement.style.opacity = 0;
+    countdownElement.style.opacity = 1;
+    countdownElement.classList.remove("warning");
     phase = "stretching";
     window.requestAnimationFrame(animate);
   }
 });
 
+// Track Force Touch pressure during stretching
+window.addEventListener("webkitmouseforcechanged", function (event) {
+  if (phase == "stretching") {
+    // event.webkitForce ranges from 1 (click) to 3 (max force)
+    // Normalize to 0-1 range
+    currentForce = Math.min(1, Math.max(0, (event.webkitForce - 1) / 2));
+  }
+});
+
+// Also listen for mouseup to handle force release
 window.addEventListener("mouseup", function (event) {
   if (phase == "stretching") {
-    phase = "turning";
+    currentForce = 0;
   }
 });
 
@@ -191,7 +217,33 @@ function animate(timestamp) {
     case "waiting":
       return; // Stop the loop
     case "stretching": {
-      sticks.last().length += (timestamp - lastTimestamp) / stretchingSpeed;
+      // Initialize countdown start time
+      if (!countdownStartTime) {
+        countdownStartTime = timestamp;
+      }
+
+      // Calculate remaining time
+      const elapsed = timestamp - countdownStartTime;
+      const remaining = Math.max(0, countdownDuration - elapsed);
+      const remainingSeconds = remaining / 1000;
+
+      // Update countdown display
+      countdownElement.innerText = remainingSeconds.toFixed(2);
+
+      // Add warning class when less than 1 second
+      if (remainingSeconds < 1) {
+        countdownElement.classList.add("warning");
+      }
+
+      // Stick length is determined by Force Touch pressure
+      sticks.last().length = currentForce * maxStickLength;
+
+      // When countdown reaches 0, finalize stick and start turning
+      if (remaining <= 0) {
+        countdownElement.style.opacity = 0;
+        countdownElement.classList.remove("warning");
+        phase = "turning";
+      }
       break;
     }
     case "turning": {
